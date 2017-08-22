@@ -30,8 +30,8 @@ for i in $(seq 0 $((${#ARCHS[@]} - 1)))
           $CURRENT_DIR/dockerfile.sh brunneis/tor-relay:${ARCHS[$i]} $variant > Dockerfile
         else
           $CURRENT_DIR/dockerfile.sh ${SOURCE_IMAGES[$i]} $variant > Dockerfile
+	  cp $CURRENT_DIR/entrypoint.sh entrypoint.sh
         fi
-	cp $CURRENT_DIR/entrypoint.sh entrypoint.sh
         docker build -t brunneis/$variant:${ARCHS[$i]} .
         cd $CURRENT_DIR
       done
