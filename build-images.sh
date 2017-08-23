@@ -14,8 +14,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-ARCHS=(x86-64 armhf arm64)
-SOURCE_IMAGES=(ubuntu:16.04 brunneis/ubuntu-armhf:xenial brunneis/ubuntu-arm64:xenial)
+ARCHS=(x86-64)
+SOURCE_IMAGES=(ubuntu:16.04)
+
+# ARCHS=(armhf arm64)
+# SOURCE_IMAGES=(brunneis/ubuntu-armhf:xenial brunneis/ubuntu-arm64:xenial)
+
 VARIANTS=(tor-relay tor-relay-arm)
 
 CURRENT_DIR=$(pwd)

@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ################################################################################
-# Example usage: ./dockerfile.sh ubuntu:xenial > Dockerfile
+# Usage example: ./dockerfile.sh ubuntu:xenial tor-relay > Dockerfile
 #
 # arg1 - Docker image
 # arg2 - Image variant (tor-relay or tor-relay-arm)

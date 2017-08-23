@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ################################################################################
-# Example usage: ./launch-relay.sh brunneis/tor-relay-arn:x86-64 middle
+# Usage example: ./launch-relay.sh brunneis/tor-relay-arm:x86-64 middle
 #
 # arg1 - Docker image
 # arg2 - Tor relay type (bridge, middle or exit)
@@ -24,17 +24,22 @@
 
 OR_PORT=9001
 DIR_PORT=9030
+NICKNAME=NotProvided
+CONTACT_INFO=not-provided@example.com
+BANDWIDTH_RATE="250 KBytes"
+BANDWIDTH_BURST="500 KBytes"
+MAX_MEM="512 MB"
 
 docker run -d \
 -p $OR_PORT:$OR_PORT \
 -p $DIR_PORT:$DIR_PORT \
 -e "OR_PORT=$OR_PORT" \
 -e "DIR_PORT=$DIR_PORT" \
--e "NICKNAME=brunneis4freedom" \
--e "CONTACT_INFO=dev@brunneis.com" \
--e "BANDWIDTH_RATE=50 MBits" \
--e "BANDWIDTH_BURST=50 MBits" \
--e "MAX_MEM=1 GB" \
+-e "NICKNAME=$NICKNAME" \
+-e "CONTACT_INFO=$CONTACT_INFO" \
+-e "BANDWIDTH_RATE=$BANDWIDTH_RATE" \
+-e "BANDWIDTH_BURST=$BANDWIDTH_BURST" \
+-e "MAX_MEM=$MAX_MEM" \
 -e "HOST_UID=$UID" \
 -v $(pwd)/tor-data:/home/tor/data:Z \
 --name tor-$2-relay $1 $2
