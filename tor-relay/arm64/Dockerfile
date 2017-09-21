@@ -19,9 +19,9 @@ MAINTAINER "Rodrigo Martínez" <dev@brunneis.com>
 # TOR RELAY
 ################################################
 
-ENV TOR_VERSION 0.3.0.10
+ENV TOR_VERSION 0.3.1.7
 ENV TOR_TARBALL_NAME tor-$TOR_VERSION.tar.gz
-ENV TOR_TARBALL_LINK https://www.torproject.org/dist/$TOR_TARBALL_NAME
+ENV TOR_TARBALL_LINK https://dist.torproject.org/$TOR_TARBALL_NAME
 ENV TOR_TARBALL_ASC $TOR_TARBALL_NAME.asc
 ENV TOR_GPG_KEY 0x6AFEE6D49E92B601
 
@@ -61,5 +61,5 @@ RUN \
   && apt-get clean
 
 COPY entrypoint.sh /
-RUN chmod +x entrypoint.sh
+RUN chmod +rx entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

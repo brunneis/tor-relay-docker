@@ -16,19 +16,17 @@
 
 if [ "$(whoami)" == "root" ]; then
   userdel tor
-  useradd -s /bin/bash -u $HOST_UID tor
-
-  echo -e "export NICKNAME='${NICKNAME:-NotProvided}'\n\
+  useradd -s /bin/bash -u $HOST_UID tor \
+  && echo -e "export NICKNAME='${NICKNAME:-NotProvided}'\n\
 export CONTACT_INFO='${CONTACT_INFO:-NotProvided}'\n\
 export OR_PORT='${OR_PORT:-9001}'\n\
 export DIR_PORT='${DIR_PORT:-9030}'\n\
 export CONTROL_PORT='${CONTROL_PORT:-9051}'\n\
 export BANDWIDTH_RATE='${BANDWIDTH_RATE:-1 MBits}'\n\
 export BANDWIDTH_BURST='${BANDWIDTH_BURST:-2 MBits}'\n\
-export MAX_MEM='${MAX_MEM:-512 MB}'" > /home/tor/env.sh
-
-  chown -R tor:tor /home/tor
-  su -c "/entrypoint.sh $1" - tor
+export MAX_MEM='${MAX_MEM:-512 MB}'" > /home/tor/env.sh \
+  && chown -R tor:tor /home/tor \
+  && su -c "/entrypoint.sh $1" - tor
 
   exit
 fi

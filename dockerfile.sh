@@ -19,8 +19,9 @@
 #
 # arg1 - Docker image
 # arg2 - Image variant (tor-relay or tor-relay-arm)
-#
 ################################################################################
+
+TOR_VERSION=$(cat TOR_VERSION)
 
 if [ "$2" == "tor-relay" ]; then
   cat <<EOF
@@ -45,9 +46,9 @@ MAINTAINER "Rodrigo Martínez" <dev@brunneis.com>
 # TOR RELAY
 ################################################
 
-ENV TOR_VERSION 0.3.0.10
+ENV TOR_VERSION $TOR_VERSION
 ENV TOR_TARBALL_NAME tor-\$TOR_VERSION.tar.gz
-ENV TOR_TARBALL_LINK https://www.torproject.org/dist/\$TOR_TARBALL_NAME
+ENV TOR_TARBALL_LINK https://dist.torproject.org/\$TOR_TARBALL_NAME
 ENV TOR_TARBALL_ASC \$TOR_TARBALL_NAME.asc
 ENV TOR_GPG_KEY 0x6AFEE6D49E92B601
 
@@ -87,7 +88,7 @@ RUN \\
   && apt-get clean
 
 COPY entrypoint.sh /
-RUN chmod +x entrypoint.sh
+RUN chmod +rx entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 EOF
 fi

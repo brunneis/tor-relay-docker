@@ -1,20 +1,32 @@
 #!/bin/bash
 
+# Tor relay entrypoint
+# Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 if [ "$(whoami)" == "root" ]; then
   userdel tor
-  useradd -s /bin/bash -u $HOST_UID tor
-
-  echo -e "export NICKNAME='${NICKNAME:-NotProvided}'\n\
+  useradd -s /bin/bash -u $HOST_UID tor \
+  && echo -e "export NICKNAME='${NICKNAME:-NotProvided}'\n\
 export CONTACT_INFO='${CONTACT_INFO:-NotProvided}'\n\
 export OR_PORT='${OR_PORT:-9001}'\n\
 export DIR_PORT='${DIR_PORT:-9030}'\n\
 export CONTROL_PORT='${CONTROL_PORT:-9051}'\n\
 export BANDWIDTH_RATE='${BANDWIDTH_RATE:-1 MBits}'\n\
 export BANDWIDTH_BURST='${BANDWIDTH_BURST:-2 MBits}'\n\
-export MAX_MEM='${MAX_MEM:-512 MB}'" > /home/tor/env.sh
-
-  chown -R tor:tor /home/tor
-  su -c "/entrypoint.sh $1" - tor
+export MAX_MEM='${MAX_MEM:-512 MB}'" > /home/tor/env.sh \
+  && chown -R tor:tor /home/tor \
+  && su -c "/entrypoint.sh $1" - tor
 
   exit
 fi

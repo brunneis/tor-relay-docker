@@ -14,30 +14,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-ARCHS=(x86-64)
-SOURCE_IMAGES=(ubuntu:16.04)
+################################################################################
+# Usage example: ./build-arch-images.sh armhf arm64
+#
+# args - Architectures
+################################################################################
 
-# ARCHS=(armhf arm64)
-# SOURCE_IMAGES=(brunneis/ubuntu-armhf:xenial brunneis/ubuntu-arm64:xenial)
-
+ARCHS=($@)
 VARIANTS=(tor-relay tor-relay-arm)
-
 CURRENT_DIR=$(pwd)
+TOR_VERSION=$(cat TOR_VERSION)
 
-for i in $(seq 0 $((${#ARCHS[@]} - 1)))
+for arch in ${ARCHS[@]}
   do
     for variant in ${VARIANTS[@]}
       do
-        mkdir -p $variant/${ARCHS[$i]}
-        cd $variant/${ARCHS[$i]}
-        if [ "$variant" == "tor-relay-arm" ]; then
-          $CURRENT_DIR/dockerfile.sh brunneis/tor-relay:${ARCHS[$i]} $variant > Dockerfile
-        else
-          $CURRENT_DIR/dockerfile.sh ${SOURCE_IMAGES[$i]} $variant > Dockerfile
-	  cp $CURRENT_DIR/entrypoint.sh entrypoint.sh
-        fi
-        docker build -t brunneis/$variant:${ARCHS[$i]} .
-        cd $CURRENT_DIR
+        cd $CURRENT_DIR/$variant/$arch
+        docker build -t brunneis/$variant:$arch .
+        docker tag brunneis/$variant:$arch \
+            brunneis/$variant:$TOR_VERSION\_$arch
       done
   done
-
