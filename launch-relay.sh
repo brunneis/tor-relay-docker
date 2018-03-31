@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Tor relay launcher
-# Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
+# Copyright (C) 2017-2018 Rodrigo Martínez <dev@brunneis.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,8 +28,10 @@ CONTACT_INFO=not-provided@example.com
 BANDWIDTH_RATE="250 KBytes"
 BANDWIDTH_BURST="500 KBytes"
 MAX_MEM="512 MB"
+ACCOUNTING_MAX="0"
+ACCOUNTING_START="month 1 00:00"
 
-docker run -d \
+docker run -id \
 -p $OR_PORT:$OR_PORT \
 -p $DIR_PORT:$DIR_PORT \
 -e "OR_PORT=$OR_PORT" \
@@ -39,6 +41,8 @@ docker run -d \
 -e "BANDWIDTH_RATE=$BANDWIDTH_RATE" \
 -e "BANDWIDTH_BURST=$BANDWIDTH_BURST" \
 -e "MAX_MEM=$MAX_MEM" \
+-e "ACCOUNTING_MAX=$ACCOUNTING_MAX" \
+-e "ACCOUNTING_START=$ACCOUNTING_START" \
 -e "HOST_UID=$UID" \
 -v $(pwd)/tor-data:/home/tor/data:Z \
 --name tor-$2-relay $1 $2

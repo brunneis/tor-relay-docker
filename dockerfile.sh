@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dockerfile generator for a Tor relay image
-# Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
+# Copyright (C) 2017-2018 Rodrigo Martínez <dev@brunneis.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ TOR_VERSION=$(cat TOR_VERSION)
 if [ "$2" == "tor-relay" ]; then
   cat <<EOF
 # Tor relay from source
-# Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
+# Copyright (C) 2017-2018 Rodrigo Martínez <dev@brunneis.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ fi
 if [ "$2" == "tor-relay-arm" ]; then
   cat <<EOF
 # Tor relay from source with ARM (Anonymizing Relay Monitor)
-# Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
+# Copyright (C) 2017-2018 Rodrigo Martínez <dev@brunneis.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

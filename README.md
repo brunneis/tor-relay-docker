@@ -36,11 +36,14 @@ is the tor-relay image and the second one, the relay type:
 
 Currently, it is possible to configure also the following variables when
 launching a dockerized relay and all of them come with default values:
-- OR_PORT
-- DIR_PORT
-- BANDWIDTH_RATE
-- BANDWIDTH_BURST
-- MAX_MEM
+- OR_PORT (ORPort)
+- DIR_PORT (DirPort)
+- CONTROL_PORT (ControlPort)
+- BANDWIDTH_RATE (RelayBandwidthRate)
+- BANDWIDTH_BURST (RelayBandwidthBurst)
+- MAX_MEM (MaxMemInQueues)
+- ACCOUNTING_MAX (AccountingMax)
+- ACCOUNTING_START (AccountingStart)
 
 If you want to run a Docker image directly just set the previous environment
 variables and bind a volume for the Tor data as shown bellow:

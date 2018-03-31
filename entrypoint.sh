@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Tor relay entrypoint
-# Copyright (C) 2017 Rodrigo Martínez <dev@brunneis.com>
+# Copyright (C) 2017-2018 Rodrigo Martínez <dev@brunneis.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 if [ "$(whoami)" == "root" ]; then
   useradd -s /bin/bash -u $HOST_UID tor 2> /dev/null
-  
+
   if [ $? -eq 0 ]; then
     echo -e "export NICKNAME='${NICKNAME:-NotProvided}'\n\
 export CONTACT_INFO='${CONTACT_INFO:-NotProvided}'\n\
@@ -25,10 +25,12 @@ export DIR_PORT='${DIR_PORT:-9030}'\n\
 export CONTROL_PORT='${CONTROL_PORT:-9051}'\n\
 export BANDWIDTH_RATE='${BANDWIDTH_RATE:-1 MBits}'\n\
 export BANDWIDTH_BURST='${BANDWIDTH_BURST:-2 MBits}'\n\
-export MAX_MEM='${MAX_MEM:-512 MB}'" > /home/tor/env.sh \
+export MAX_MEM='${MAX_MEM:-512 MB}'\n\
+export ACCOUNTING_MAX='${ACCOUNTING_MAX:-0}'\n\
+export ACCOUNTING_START='${ACCOUNTING_START:-month 1 00:00}'" > /home/tor/env.sh \
     && chown -R tor:tor /home/tor
   fi
-  
+
   su -c "/entrypoint.sh $1" - tor
   exit
 fi
@@ -45,7 +47,9 @@ Nickname $NICKNAME\n\
 ContactInfo $CONTACT_INFO\n\
 RelayBandwidthRate $BANDWIDTH_RATE\n\
 RelayBandwidthBurst $BANDWIDTH_BURST\n\
-MaxMemInQueues $MAX_MEM" > $CONF_FILE
+MaxMemInQueues $MAX_MEM\n\
+AccountingMax $ACCOUNTING_MAX\n\
+AccountingStart $ACCOUNTING_START" > $CONF_FILE
 
 if [ "$1" == "middle" ]; then
   echo -e "ExitRelay 0\n\
