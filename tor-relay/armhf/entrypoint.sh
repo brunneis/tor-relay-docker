@@ -14,7 +14,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 if [ "$(whoami)" == "root" ]; then
+
+  # Fix if the container is launched with the root (host) user
+  if [ $HOST_UID -eq 0 ]; then
+    HOST_UID=1000
+  fi
+
   useradd -s /bin/bash -u $HOST_UID tor 2> /dev/null
 
   if [ $? -eq 0 ]; then
