@@ -21,7 +21,7 @@
 # arg2 - Image variant (tor-relay or tor-relay-arm)
 ################################################################################
 
-TOR_VERSION=$(cat TOR_VERSION)
+source env.sh
 
 if [ "$2" == "tor-relay" ]; then
   cat <<EOF

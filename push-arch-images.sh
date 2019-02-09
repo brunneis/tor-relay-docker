@@ -20,9 +20,9 @@
 # args - Architectures
 ################################################################################
 
+source env.sh
 ARCHS=($@)
 VARIANTS=(tor-relay tor-relay-arm)
-TOR_VERSION=$(cat TOR_VERSION)
 
 for arch in ${ARCHS[@]}
   do
