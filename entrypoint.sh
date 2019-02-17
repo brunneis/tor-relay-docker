@@ -16,7 +16,6 @@
 
 
 if [ "$(whoami)" == "root" ]; then
-
   # Fix if the container is launched with the root (host) user
   if [ $HOST_UID -eq 0 ]; then
     HOST_UID=1000
@@ -26,15 +25,15 @@ if [ "$(whoami)" == "root" ]; then
 
   if [ $? -eq 0 ]; then
     echo -e "export NICKNAME='${NICKNAME:-NotProvided}'\n\
-export CONTACT_INFO='${CONTACT_INFO:-NotProvided}'\n\
-export OR_PORT='${OR_PORT:-9001}'\n\
-export DIR_PORT='${DIR_PORT:-9030}'\n\
-export CONTROL_PORT='${CONTROL_PORT:-9051}'\n\
-export BANDWIDTH_RATE='${BANDWIDTH_RATE:-1 MBits}'\n\
-export BANDWIDTH_BURST='${BANDWIDTH_BURST:-2 MBits}'\n\
-export MAX_MEM='${MAX_MEM:-512 MB}'\n\
-export ACCOUNTING_MAX='${ACCOUNTING_MAX:-0}'\n\
-export ACCOUNTING_START='${ACCOUNTING_START:-month 1 00:00}'" > /home/tor/env.sh \
+    export CONTACT_INFO='${CONTACT_INFO:-NotProvided}'\n\
+    export OR_PORT='${OR_PORT:-9001}'\n\
+    export DIR_PORT='${DIR_PORT:-9030}'\n\
+    export CONTROL_PORT='${CONTROL_PORT:-9051}'\n\
+    export BANDWIDTH_RATE='${BANDWIDTH_RATE:-1 MBits}'\n\
+    export BANDWIDTH_BURST='${BANDWIDTH_BURST:-2 MBits}'\n\
+    export MAX_MEM='${MAX_MEM:-512 MB}'\n\
+    export ACCOUNTING_MAX='${ACCOUNTING_MAX:-0}'\n\
+    export ACCOUNTING_START='${ACCOUNTING_START:-month 1 00:00}'" > /home/tor/env.sh \
     && chown -R tor:tor /home/tor
   fi
 
@@ -48,7 +47,6 @@ source ~/env.sh
 echo -e "SocksPort 0\n\
 DataDirectory /home/tor/data\n\
 DisableDebuggerAttachment 0\n\
-ORPort $OR_PORT\n\
 ControlPort $CONTROL_PORT\n\
 Nickname $NICKNAME\n\
 ContactInfo $CONTACT_INFO\n\
@@ -57,6 +55,10 @@ RelayBandwidthBurst $BANDWIDTH_BURST\n\
 MaxMemInQueues $MAX_MEM\n\
 AccountingMax $ACCOUNTING_MAX\n\
 AccountingStart $ACCOUNTING_START" > $CONF_FILE
+
+for PORT in $OR_PORT; do
+  echo -e "ORPort $PORT" >> $CONF_FILE
+done
 
 if [ "$1" == "middle" ]; then
   echo -e "ExitRelay 0\n\
@@ -83,5 +85,7 @@ ExitPolicy reject 62.141.55.117:*\n\
 ExitPolicy reject 62.141.54.117:*\n\
 ExitPolicy accept *:*" >> $CONF_FILE
 fi
+
+cat $CONF_FILE
 
 exec /usr/local/bin/tor -f ~/torrc

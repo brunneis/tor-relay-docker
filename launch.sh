@@ -15,24 +15,23 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ################################################################################
-# Usage example: ./launch-relay.sh brunneis/tor-relay-arm:x86-64 middle
+# Usage example: ./launch.sh brunneis/tor-relay-arm:x86-64 middle
 #
 # arg1 - Docker image
 # arg2 - Tor relay type (bridge, middle or exit)
 ################################################################################
 
-OR_PORT=9001
-DIR_PORT=9030
-NICKNAME=NotProvided
-CONTACT_INFO=not-provided@example.com
-BANDWIDTH_RATE="250 KBytes"
-BANDWIDTH_BURST="500 KBytes"
-MAX_MEM="512 MB"
-ACCOUNTING_MAX="0"
-ACCOUNTING_START="month 1 00:00"
+source ./env.sh
+DOCKER_IMAGE=${1:-brunneis/tor-relay-arm:x86-64}
+RELAY_TYPE=${2:-bridge}
+
+for PORT in $OR_PORT; do
+    OR_PORT_DOCKER=$PORT
+    break
+done
 
 docker run -id \
--p $OR_PORT:$OR_PORT \
+-p $OR_PORT_DOCKER:$OR_PORT_DOCKER \
 -p $DIR_PORT:$DIR_PORT \
 -e "OR_PORT=$OR_PORT" \
 -e "DIR_PORT=$DIR_PORT" \
@@ -45,4 +44,4 @@ docker run -id \
 -e "ACCOUNTING_START=$ACCOUNTING_START" \
 -e "HOST_UID=$UID" \
 -v $(pwd)/tor-data:/home/tor/data:Z \
---name tor-$2-relay $1 $2
+--name tor-$RELAY_TYPE-relay $DOCKER_IMAGE $RELAY_TYPE
