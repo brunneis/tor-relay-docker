@@ -1,4 +1,4 @@
-# tor-relay-docker (0.4.0.5)
+# tor-relay-docker (0.4.1.6)
 Tor relay Docker images for x86-64, armhf &amp; arm64 (from source).
 
 There are pre-built ubuntu-based images hosted in
@@ -9,17 +9,17 @@ __Tor__ (Tor built from source)
 - [brunneis/tor-relay:x86-64](https://hub.docker.com/r/brunneis/tor-relay/tags/) (latest stable)
 - [brunneis/tor-relay:armhf](https://hub.docker.com/r/brunneis/tor-relay/tags/) (latest stable)
 - [brunneis/tor-relay:arm64](https://hub.docker.com/r/brunneis/tor-relay/tags/) (latest stable)
-- [brunneis/tor-relay:0.4.0.5_x86-64](https://hub.docker.com/r/brunneis/tor-relay/tags/)
-- [brunneis/tor-relay:0.4.0.5_armhf](https://hub.docker.com/r/brunneis/tor-relay/tags/)
-- [brunneis/tor-relay:0.4.0.5_arm64](https://hub.docker.com/r/brunneis/tor-relay/tags/)
+- [brunneis/tor-relay:0.4.1.6_x86-64](https://hub.docker.com/r/brunneis/tor-relay/tags/)
+- [brunneis/tor-relay:0.4.1.6_armhf](https://hub.docker.com/r/brunneis/tor-relay/tags/)
+- [brunneis/tor-relay:0.4.1.6_arm64](https://hub.docker.com/r/brunneis/tor-relay/tags/)
 
 __Tor with ARM (Anonymizing Relay Monitor)__ (based on tor-relay images)
 - [brunneis/tor-relay-arm:x86-64](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/) (latest stable)
 - [brunneis/tor-relay-arm:armhf](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/) (latest stable)
 - [brunneis/tor-relay-arm:arm64](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/) (latest stable)
-- [brunneis/tor-relay-arm:0.4.0.5_x86-64](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/)
-- [brunneis/tor-relay-arm:0.4.0.5_armhf](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/)
-- [brunneis/tor-relay-arm:0.4.0.5_arm64](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/)
+- [brunneis/tor-relay-arm:0.4.1.6_x86-64](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/)
+- [brunneis/tor-relay-arm:0.4.1.6_armhf](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/)
+- [brunneis/tor-relay-arm:0.4.1.6_arm64](https://hub.docker.com/r/brunneis/tor-relay-arm/tags/)
 
 
 ## How it works

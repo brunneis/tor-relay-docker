@@ -19,7 +19,7 @@ MAINTAINER "Rodrigo Martínez" <dev@brunneis.com>
 # TOR RELAY
 ################################################
 
-ENV TOR_VERSION 0.4.0.5
+ENV TOR_VERSION 0.4.1.6
 ENV TOR_TARBALL_NAME tor-$TOR_VERSION.tar.gz
 ENV TOR_TARBALL_LINK https://dist.torproject.org/$TOR_TARBALL_NAME
 ENV TOR_TARBALL_ASC $TOR_TARBALL_NAME.asc
