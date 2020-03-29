@@ -7,7 +7,7 @@
 </p>
 <br>
 
-<a href="https://github.com/brunneis/pygram/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/brunneis/pygram.svg?style=flat-square&color=blue"></a>
+<a href="https://github.com/brunneis/tor-relay-docker/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/brunneis/tor-relay-docker.svg?style=flat-square&color=blue"></a>
 
 Tor relay Docker images for x86-64, armhf &amp; arm64 (from source).
 
