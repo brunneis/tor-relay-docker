@@ -1,4 +1,14 @@
-# tor-relay-docker (0.4.2.5)
+<h1 align="center">
+<b>Tor Relay Docker</b>
+</h1>
+
+<p align="center">
+    <a href="https://www.buymeacoffee.com/brunneis" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="35px"></a>
+</p>
+<br>
+
+<a href="https://github.com/brunneis/pygram/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/brunneis/pygram.svg?style=flat-square&color=blue"></a>
+
 Tor relay Docker images for x86-64, armhf &amp; arm64 (from source).
 
 There are pre-built ubuntu-based images hosted in
