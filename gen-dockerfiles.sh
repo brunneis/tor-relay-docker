@@ -18,9 +18,9 @@ ARCHS=(x86-64
        armhf
        arm64)
 
-SOURCE_IMAGES=(ubuntu:16.04
-               brunneis/ubuntu-armhf:xenial
-               brunneis/ubuntu-arm64:xenial)
+SOURCE_IMAGES=(ubuntu:20.04
+               ubuntu:20.04
+               ubuntu:20.04)
 
 VARIANTS=(tor-relay tor-relay-arm)
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-export TOR_VERSION="0.4.2.5"
+export TOR_VERSION="0.4.6.6"
 export OR_PORT="9001"
 export DIR_PORT="9030"
 export NICKNAME="NotProvided"

@@ -12,18 +12,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-FROM brunneis/ubuntu-armhf:xenial
+FROM ubuntu:20.04
 MAINTAINER "Rodrigo Martínez" <dev@brunneis.com>
 
 ################################################
 # TOR RELAY
 ################################################
 
-ENV TOR_VERSION 0.4.2.5
+ENV TOR_VERSION 0.4.6.6
 ENV TOR_TARBALL_NAME tor-$TOR_VERSION.tar.gz
 ENV TOR_TARBALL_LINK https://dist.torproject.org/$TOR_TARBALL_NAME
 ENV TOR_TARBALL_ASC $TOR_TARBALL_NAME.asc
-ENV TOR_GPG_KEY 0x6AFEE6D49E92B601
 
 RUN \
   apt-get update \
@@ -34,12 +33,14 @@ RUN \
     gcc \
     libevent-dev \
     libssl-dev \
+    gnupg \
+    zlib1g-dev \
   && apt-get clean
 
 RUN \
   wget $TOR_TARBALL_LINK \
   && wget $TOR_TARBALL_LINK.asc \
-  && gpg --keyserver pool.sks-keyservers.net --recv-keys $TOR_GPG_KEY \
+  && gpg --keyserver keys.openpgp.org --recv-keys 7A02B3521DC75C542BA015456AFEE6D49E92B601 \
   && gpg --verify $TOR_TARBALL_NAME.asc \
   && tar xvf $TOR_TARBALL_NAME \
   && cd tor-$TOR_VERSION \
@@ -58,6 +59,7 @@ RUN \
     gcc \
     libevent-dev \
     libssl-dev \
+    zlib1g-dev \
   && apt-get clean
 
 COPY entrypoint.sh /
