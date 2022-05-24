@@ -19,7 +19,7 @@ MAINTAINER "Rodrigo Martínez" <dev@brunneis.com>
 # TOR RELAY
 ################################################
 
-ENV TOR_VERSION 0.4.6.6
+ENV TOR_VERSION 0.4.7.7
 ENV TOR_TARBALL_NAME tor-$TOR_VERSION.tar.gz
 ENV TOR_TARBALL_LINK https://dist.torproject.org/$TOR_TARBALL_NAME
 ENV TOR_TARBALL_ASC $TOR_TARBALL_NAME.asc
@@ -39,9 +39,12 @@ RUN \
 
 RUN \
   wget $TOR_TARBALL_LINK \
-  && wget $TOR_TARBALL_LINK.asc \
-  && gpg --keyserver keys.openpgp.org --recv-keys 7A02B3521DC75C542BA015456AFEE6D49E92B601 \
-  && gpg --verify $TOR_TARBALL_NAME.asc \
+  && wget $TOR_TARBALL_LINK.sha256sum \
+  && sha256sum -c $TOR_TARBALL_NAME.sha256sum \
+  && wget $TOR_TARBALL_LINK.sha256sum.asc \
+  && gpg --keyserver keys.openpgp.org --recv-keys 514102454D0A87DB0767A1EBBE6A0531C18A9179 \
+  && gpg --keyserver keys.openpgp.org --recv-keys B74417EDDF22AC9F9E90F49142E86A2A11F48D36 \
+  && gpg --verify $TOR_TARBALL_NAME.sha256sum.asc \
   && tar xvf $TOR_TARBALL_NAME \
   && cd tor-$TOR_VERSION \
   && ./configure \
@@ -50,7 +53,9 @@ RUN \
   && cd .. \
   && rm -r tor-$TOR_VERSION \
   && rm $TOR_TARBALL_NAME \
-  && rm $TOR_TARBALL_NAME.asc
+  && rm $TOR_TARBALL_NAME.sha256sum \
+  && rm $TOR_TARBALL_NAME.sha256sum.asc
+
 
 RUN \
   apt-get -y remove \
